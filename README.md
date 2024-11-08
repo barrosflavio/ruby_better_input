@@ -1,31 +1,100 @@
-# BetterInput
+# Ruby Better Input
 
-TODO: Delete this and the text below, and describe your gem
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/better_input`. To experiment with that code, run `bin/console` for an interactive prompt.
+Whenever I tried to make an application that would be based on a command line interface (CLI) I found myself having to do some of the things included in this gem, especially when it came to "verbose", when I wanted to display a question to the user or even check if he entered the input I expected. Tired of always coding the same function I decided to make this gem.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+To install this gem just use:
 
-Install the gem and add to the application's Gemfile by executing:
+```shell
+gem install better_input
+```
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 
 ## Usage
+Normally to handle user input in ruby ​you would do something like this:
+```ruby
+puts "What is your age?"
+age = gets.chomp
+```
+and then if you wanted a "verbose" input you would have to do another PUTS. And it gets even worse if you want to check if the input is of the expected type:
+```ruby
+puts "What is your age?"
 
-TODO: Write usage instructions here
+age = nil
+loop do
+  input = gets.chomp
+  if input.match?(/^\d+$/)
+    age = input.to_i
+    break
+  else
+    puts "Please enter a valid integer for your age."
+  end
+end
 
-## Development
+puts "User response: #{age}"
+```
+Although it requires other approaches like the one I did in the gem. here are some examples of how it works with inputs in ruby ​​using the gem:
+```ruby
+require 'better_input'
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+age = Bi.input("Digite um número: ", type: "int", show_response: true)
+#In a single line we asked the question and stored it in a variable, we made sure it was the type we wanted and we even made the answer appear!
+```
+```ruby
+#Another examples:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+noquestion = Bi.input()
+retype = Bi.input(show_response: true)
+onlyfloat = Bi.input(type: float)
 
-## Contributing
+name = Bi.input("What is your name?")
+puts "Your name is #{name}"
+```
+Anyway, use your creativity, now receiving constant user input for CLI has become less laborious!
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/better_input.
+## Function before becoming a gem
+This was more or less the base that I ended up making, I made some small improvements that you can find in the files present in this repository before turning it into a gem.
+```ruby
+def input(question = nil, show_response: false, type: "string")
+  unless question.nil?
+    puts question
+  end
+
+  loop do
+    var = gets.chomp
+
+    if type == "int"
+      begin
+        var = Integer(var)
+      rescue ArgumentError
+        puts "Err: Please, type a (integer) number."
+        next
+      end
+    elsif type == "float"
+      begin
+        var = Float(var)
+      rescue ArgumentError
+        puts "Err: Please, type a (float) number."
+        next
+      end
+    elsif type == "bool"
+      if var.downcase == "true"
+        var = true
+      elsif var.downcase == "false"
+        var = false
+      else
+        puts "Err: Please, type 'true' or 'false'."
+        next
+      end
+    else
+      var = var
+    end
+
+    if show_response
+      puts "User Response: #{var}"
+    end
+    return var
+  end
+end
+```

@@ -4,7 +4,7 @@ require_relative "lib/better_input/version"
 
 Gem::Specification.new do |spec|
   spec.name = "better_input"
-  spec.version = BetterInput::VERSION
+  spec.version = Bi::VERSION
   spec.authors = ["Barros Flavio"]
   spec.email = ["flaviomarbs@gmail.com"]
 

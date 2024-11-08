@@ -1,4 +1,4 @@
-module BetterInput
+module Bi
   def self.input(question = nil, show_response: false, type: "string")
     unless question.nil?
       puts question
@@ -31,6 +31,10 @@ module BetterInput
           puts "Err: Please, type 'true' or 'false'."
           next
         end
+      when "string"
+        var = String(var)
+      else
+        puts "Err: Undefined type."
       end
 
       if show_response

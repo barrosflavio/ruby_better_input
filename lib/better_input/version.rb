@@ -1,3 +1,3 @@
-module BetterInput
-  VERSION = "0.1.0"
+module Bi
+  VERSION = "0.1.1"
 end
