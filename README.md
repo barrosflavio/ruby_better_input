@@ -9,8 +9,11 @@ To install this gem just use:
 ```shell
 gem install better_input
 ```
-
-
+## Features
+  - Ask, receive and check input in a single line
+  - Support for types such as integer, float and boolean.
+  - Input validation with clear error messages.
+  - Intuitive and easy-to-use function.
 ## Usage
 Normally to handle user input in ruby ​you would do something like this:
 ```ruby

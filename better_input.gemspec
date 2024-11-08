@@ -9,7 +9,19 @@ Gem::Specification.new do |spec|
   spec.email = ["flaviomarbs@gmail.com"]
 
   spec.summary = "A better input function for ruby"
-  spec.description = "When working with CLI I found myself doing things that could be summarized as this function, so I did it!"
+  spec.description = <<~DESC
+  This is an improved input function for Ruby.\n
+  \n
+  Using this gem, you can easily get user input with real-time type validation, ensuring that the data provided is as expected, among other things.\n
+  \n
+  If you have any questions, check the documentation: https://github.com/barrosflavio/ruby_better_input\n
+  \n
+  Features:\n
+    - Ask, receive and check input in a single line\n
+    - Support for types such as integer, float and boolean.\n
+    - Input validation with clear error messages.\n
+    - Intuitive and easy-to-use function.\n
+  DESC
   spec.homepage = "https://github.com/barrosflavio/ruby_better_input"
   spec.required_ruby_version = ">= 3.0.0"
 
