@@ -39,7 +39,8 @@ Although it requires other approaches like the one I did in the gem. here are so
 require 'better_input'
 
 age = Bi.input("Digite um número: ", type: "int", show_response: true)
-#In a single line we asked the question and stored it in a variable, we made sure it was the type we wanted and we even made the answer appear!
+# In a single line we asked the question and stored it in a variable,
+# we made sure it was the type we wanted and we even made the answer appear!
 ```
 ```ruby
 #Another examples:
